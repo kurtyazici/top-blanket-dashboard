@@ -30,7 +30,7 @@ const pick = n => {
   const o = n === 90 ? 9 : n === 1 ? 7 : n === 7 ? 5 : 3;
   return rows.filter(r => (r[11] & (n === 90 ? 2 : 1)) && r[o] > 100).sort((a,b) => b[o] - a[o])[0];
 };
-const top = [...new Set([pick(90), pick(30), pick(7), pick(1), pick('rising')].map(r => String(r[0])))];
+const top = [...new Set([pick(90), pick(30), pick(7), pick(1), pick('rising')].filter(Boolean).map(r => String(r[0])))];
 console.log(`PASS: ${rows.length} rows; top-card IDs requiring live browser smoke test: ${top.join(', ')}`);
 
 if ((html.match(/id="b90"/g)||[]).length !== 1 || !html.includes('90 Days:')) throw new Error('90-day control or methodology missing');
